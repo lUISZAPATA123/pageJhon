@@ -1,0 +1,44 @@
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+#Get -> Data All Content
+GET http://localhost:3000/api/Content HTTP/1.1
+
+####### Get Content for id 
+GET http://{{host}}/api/Content/61480101c917b5d9c67fb552
+###################################################
+GET http://{{host}}/api/ContentwithCategory/614035ea7acab0df16f7cb8d
+###
+
+POST http://localhost:3000/api/Content HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+    "title_content": "Titulo de prueba",
+    "subtitle_content":"Content Subtitle", 
+    "Content_text":"loremasdasdasdasdasd",
+    "category":"614035487acab0df16f7cb85"
+}
+
+#####################################################
+
+# Create Categori 
+
+POST http://{{host}}/api/Categories
+Content-Type: {{contentType}}
+
+{
+    "name": "Sports"
+}
+
+#### GET CATEGORIAS 
+GET http://{{host}}/api/Categories
+
+### Get Categories for id 
+GET http://{{host}}/api/Categories/614035427acab0df16f7cb83
+
+
+### 
+GET http://{{host}}/api/Categories?name=Noticias
