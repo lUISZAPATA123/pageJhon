@@ -7,6 +7,8 @@ services:
     ports:
       - "3000:3000"
     links: mongodb
+    volumes:
+      - .:/usr/src/app
   mongodb:
     container_name: my_database
     image: mongo
