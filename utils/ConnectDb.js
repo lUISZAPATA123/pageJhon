@@ -7,7 +7,7 @@ const connectDb = () => {
   }
 
   mongoose.connect(
-    process.env.MONGODB_URL,
+    "mongodb://mongodb/page_google",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
