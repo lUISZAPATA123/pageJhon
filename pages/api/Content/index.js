@@ -1,11 +1,12 @@
 import nc from "next-connect";
 import db from "../../../utils/ConnectDb";
 import Content from "../../../model/ContentModel";
-db();
+
 
 const handler = nc();
 
 handler.get(async (req, res) => {
+  await db.connect();
   const GetContent = await Content.find().populate("category");
   return res.status(200).json({
     success: true,
@@ -15,6 +16,7 @@ handler.get(async (req, res) => {
 });
 
 handler.post(async (req, res) => {
+  await db.connect();
   const { title_content, subtitle_content, Content_text, urlImage, category } =
     req.body;
   if (

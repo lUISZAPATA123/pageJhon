@@ -1,10 +1,10 @@
 import db from "../../../utils/ConnectDb";
 import nc from "next-connect";
 
-db();
 const hanlder = nc();
 
 hanlder.get(async (req, res) => {
+  await db.connect();
   //   const { id } = req.query;
   //   console.log(id);
   console.log(req.query);

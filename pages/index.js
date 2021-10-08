@@ -8,9 +8,12 @@ import ArticleMedium from "../components/articlemedium";
 import MusicSection from "../components/Music";
 import Deporte from "../components/Deporte";
 import SectionGames from "../components/Games/index";
+import db from '../utils/ConnectDb'
+import Categorias from '../model/CategoriesModel'
+// export default function Home({ Music, Noticias, Sports, Games }) {
 
 export default function Home({ Music, Noticias, Sports, Games }) {
-  return (
+return (
     <div>
       <Head>
         <title>Home | Jhon C</title>
@@ -36,6 +39,7 @@ export default function Home({ Music, Noticias, Sports, Games }) {
         </GamesSection>
 
         <MusicSection MusicContent={Music} />
+        
 
         <Deporte SportContet={Sports} />
 
@@ -81,12 +85,26 @@ export default function Home({ Music, Noticias, Sports, Games }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
-    const res = await fetch("http://localhost:3000/api/Categories");
-    const data = await res.json();
+    // const res = await fetch("http://localhost:3000/api/Categories");
+    // const data = await res.json();
+    await db.connect();
+    var data = await Categorias.find();
+    if(!data) {
+      // data = [{_id:"loremasdasasdas",name:"Musica"}];
+      return{
+        props:{
+          Noticias: [],
+          Music: [],
+          Games: [],
+          Sports: []
+        }
+      }
+    }
+    console.log(data)
     const text = await Promise.all(
-      data.categori.map(async (item) => {
+      data.map(async (item) => {
         const response = await fetch(
           `http://localhost:3000/api/ContentwithCategory/${item._id}`
         );
@@ -105,6 +123,14 @@ export async function getStaticProps() {
     };
   } catch (error) {
     console.log(error);
+    return{
+      props:{
+        Noticias: text[0],
+        Music: [],
+        Games: [],
+        Sports: []
+      }
+    }
   }
 }
 

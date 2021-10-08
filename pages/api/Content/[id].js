@@ -21,6 +21,7 @@ handler.get(async (req, res) => {
 
 // update por one Element
 handler.put(async (req, res) => {
+  await db.connect();
   const { id } = req.query;
   const { title_content, subtitle_content, Content_text } = req.body;
   await Content.findByIdAndUpdate(

@@ -9,7 +9,7 @@ GET http://localhost:3000/api/Content HTTP/1.1
 ####### Get Content for id 
 GET http://{{host}}/api/Content/61480101c917b5d9c67fb552
 ###################################################
-GET http://{{host}}/api/ContentwithCategory/614035ea7acab0df16f7cb8d
+GET http://{{host}}/api/ContentwithCategory/61594325efb666001ed2fde8
 ###
 
 POST http://localhost:3000/api/Content HTTP/1.1
@@ -24,13 +24,13 @@ Content-Type: {{contentType}}
 
 #####################################################
 
-# Create Categori 
+# Create Categoria
 
 POST http://{{host}}/api/Categories
 Content-Type: {{contentType}}
 
 {
-    "name": "Sports"
+    "name": "Musica"
 }
 
 #### GET CATEGORIAS 
